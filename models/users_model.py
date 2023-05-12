@@ -15,3 +15,13 @@ class User(BaseModel):
     email: EmailStr
     password: str
     events: Optional[List[Event]]
+
+    class Config:
+        """The config for the User class"""
+        schema_extra = {
+            "example": {
+                "email": "fastapi@packt.com",
+                "username": "strong!!!",
+                "events": [],
+            }
+        }
