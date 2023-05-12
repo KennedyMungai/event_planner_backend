@@ -7,3 +7,5 @@ from models.events_model import Event
 
 
 event_router = APIRouter(prefix="/events", tags=["Events"])
+
+events = []
