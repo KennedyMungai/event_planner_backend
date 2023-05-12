@@ -17,11 +17,11 @@ async def retrieve_all_events() -> List[Event]:
     return events
 
 
-@event_router.get("/{event_id}", response_model=Event)
-async def retrieve_single_event(event_id: int) -> Event:
+@event_router.get("/{_event_id}", response_model=Event)
+async def retrieve_single_event(_event_id: int) -> Event:
     """Retrieve a single event"""
     for event in events:
-        if event.id == event_id:
+        if event.id == _event_id:
             return event
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -30,14 +30,14 @@ async def retrieve_single_event(event_id: int) -> Event:
 
 
 @event_router.post("/new", status_code=status.HTTP_201_CREATED)
-async def create_event(body: Event = Body(...)) -> dict[str, str]:
+async def create_event(_body: Event = Body(...)) -> dict[str, str]:
     """Create a new event"""
-    events.append(body)
+    events.append(_body)
     return {"message": "Event successfully created"}
 
 
-@event_router.delete("/{id}")
-async def delete_event(id: int) -> dict:
+@event_router.delete("/{_id}")
+async def delete_event(_id: int) -> dict:
     """The endpoint to delete a single event
 
     Args:
@@ -50,7 +50,7 @@ async def delete_event(id: int) -> dict:
         dict: A message to show successful deletion of an event
     """
     for event in events:
-        if event.id == id:
+        if event.id == _id:
             events.remove(event)
             return {"message": "Event successfully deleted"}
 
