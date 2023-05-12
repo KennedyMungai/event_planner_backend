@@ -1,6 +1,8 @@
 """The main file for the application"""
 from fastapi import FastAPI
 
+from routes.users_route import user_router
+
 
 app = FastAPI(
     title="Event Planner Backend",
@@ -12,3 +14,5 @@ app = FastAPI(
 async def root() -> dict[str, str]:
     """The root route"""
     return {"message": "Hello World"}
+
+app.include_router(user_router)
