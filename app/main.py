@@ -1,9 +1,8 @@
 """The main file for the application"""
-from fastapi import FastAPI
 import uvicorn
+from fastapi import FastAPI
 
 from routes.users_route import user_router
-
 
 app = FastAPI(
     title="Event Planner Backend",
