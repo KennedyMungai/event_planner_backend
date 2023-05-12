@@ -15,3 +15,15 @@ events = []
 async def retrieve_all_events() -> List[Event]:
     """Retrieve all events"""
     return events
+
+
+@event_router.get("/{event_id}", response_model=Event)
+async def retrieve_single_event(event_id: int) -> Event:
+    """Retrieve a single event"""
+    for event in events:
+        if event.id == event_id:
+            return event
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Event with the given id does not exist",
+    )
