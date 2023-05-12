@@ -17,6 +17,7 @@ async def root() -> dict[str, str]:
     return {"message": "Hello World"}
 
 app.include_router(user_router)
+app.include_router(event_router)
 
 
 if __name__ == "__main__":
