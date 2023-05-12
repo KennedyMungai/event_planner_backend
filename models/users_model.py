@@ -20,8 +20,20 @@ class User(BaseModel):
         """The config for the User class"""
         schema_extra = {
             "example": {
-                "email": "fastapi@packt.com",
+                "email": "kijana@mangaa.com",
                 "username": "strong!!!",
                 "events": [],
             }
+        }
+
+
+class UserSignIn(BaseModel):
+    email: EmailStr
+    password: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "email": "kijana@mangaa.com",
+                "password": "strong!!!",
         }
