@@ -20,7 +20,7 @@ class User(BaseModel):
         """The config for the User class"""
         schema_extra = {
             "example": {
-                "email": "kijana@mangaa.com",
+                "email": "kijana@mangaa .com",
                 "username": "strong!!!",
                 "events": [],
             }
@@ -28,12 +28,19 @@ class User(BaseModel):
 
 
 class UserSignIn(BaseModel):
+    """The user sign in mode;
+
+    Args:
+        BaseModel (Pydantic): The parent class for the UserSignIn class
+    """
     email: EmailStr
     password: str
 
     class Config:
+        """The config subclass"""
         schema_extra = {
             "example": {
                 "email": "kijana@mangaa.com",
                 "password": "strong!!!",
+            }
         }
