@@ -1,5 +1,6 @@
 """The main file for the application"""
 from fastapi import FastAPI
+import uvicorn
 
 from routes.users_route import user_router
 
@@ -16,3 +17,7 @@ async def root() -> dict[str, str]:
     return {"message": "Hello World"}
 
 app.include_router(user_router)
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0000000", port=8000)
