@@ -1,6 +1,30 @@
-"""The events model file"""
-from typing import List, Optional
+"""Users Model"""
+from typing import List
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
-from models.events_model import Event
+
+class Event(BaseModel):
+    """The event model
+
+    Args:
+        BaseModel (Pydantic Model): The model for the Event
+    """
+    id: int
+    title: str
+    image: str
+    description: str
+    tags: List[str]
+    location: str
+
+    class Config:
+        """The config subclass for the Event model"""
+        schema_extra = {
+            "example": {
+                "title": "FastAPI Book Launch",
+                "image": "https://linktomyimage.com/image.png",
+                "description": "We will be discussing the contents of the FastAPI book in this event. Ensure to come with your own copy to win gifts!",
+                "tags": ["python", "fastapi", "book", "launch"],
+                "location": "Google Meet"
+            }
+        }
