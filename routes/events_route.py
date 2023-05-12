@@ -1,0 +1,1 @@
+"""The events route file"""
