@@ -1,0 +1,4 @@
+event_planner_backend/
+__pycache__/
+requirements.txt
+.env
