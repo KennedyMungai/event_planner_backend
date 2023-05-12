@@ -9,7 +9,7 @@ users = {}
 
 
 @user_router.post("/signup", status_code=status.HTTP_201_CREATED)
-async def sign_new_user(_data: UserSignIn) -> dict:
+async def sign_new_user(_data: User) -> dict:
     """The endpoint to create a new user
 
     Args:
