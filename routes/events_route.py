@@ -58,3 +58,15 @@ async def delete_event(_id: int) -> dict:
         status_code=status.HTTP_404_NOT_FOUND,
         detail="Event with the given id does not exist",
     )
+
+
+@event_router.delete("/")
+async def delete_all_events() -> dict:
+    """The endpoint to delete all events
+
+    Returns:
+        dict: A message to show successful deletion of all events
+    """
+    events.clear()
+
+    return {"message": "All events successfully deleted"}
