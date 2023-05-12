@@ -1,3 +1,4 @@
+"""The users route"""
 from fastapi import APIRouter, HTTPException, status
 
 from models.users_model import User, UserSignIn
