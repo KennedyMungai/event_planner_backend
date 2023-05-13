@@ -5,7 +5,7 @@ from typing import Optional
 from beanie import init_beanie
 from dotenv import find_dotenv, load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
-from pydantic import BaseSettings
+from pydantic import BaseSettings, BaseModel
 
 from models.events_model import Event
 from models.users_model import User
