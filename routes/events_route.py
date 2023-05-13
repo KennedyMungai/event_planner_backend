@@ -65,13 +65,10 @@ async def delete_event(_id: int):
     Raises:
         HTTPException: A 404 is raised if the event is not found in the database
     """
-    event = session.get(Event, _id)
+    event = await event_database.get(id)
 
-    if event:
-        session.delete(event)
-        session.commit()
+    if not event:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Event with id {id} not found")
 
-        return None
-
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"The event with id of {_id} was not found")
+    return None
