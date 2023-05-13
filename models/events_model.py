@@ -32,3 +32,28 @@ class Event(SQLModel, table=True):
                 "location": "Somewhere in the world"
             }
         }
+
+
+class EventUpdate(SQLModel):
+    """The event update model class
+
+    Args:
+        SQLModel (Pydantic): The parent class for the models
+    """
+    title: Optional[str]
+    image: Optional[str]
+    description: Optional[str]
+    tags: Optional[List[str]]
+    location: Optional[str]
+
+    class Config:
+        """The config subclass for the event update class"""
+        schema_extra = {
+            "example": {
+                "title": "SQLite db branch for the event planner code",
+                "image": "https://www.w3schools.com/howto/img_avatar.png",
+                "description": "This is a description of the event",
+                "tags": ["python", "sql", "sqlite"],
+                "location": "Somewhere in the world"
+            }
+        }
