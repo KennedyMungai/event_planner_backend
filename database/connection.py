@@ -1,6 +1,6 @@
 """The DB connection file"""
 import os
-from typing import Any, Optional
+from typing import Any, Optional, List
 
 from beanie import init_beanie, PydanticObjectId
 from dotenv import find_dotenv, load_dotenv
@@ -43,3 +43,7 @@ class Database:
             return doc
 
         return False
+
+    async def get_all(self) -> List[Any]:
+        docs = await self.model.find_all()
+        return docs
