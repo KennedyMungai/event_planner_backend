@@ -4,10 +4,10 @@ from database.connection import get_session
 from models.events_model import Event, EventUpdate
 
 
-events_route = APIRouter(prefix="/events", tags=["Events"])
+events_router = APIRouter(prefix="/events", tags=["Events"])
 
 
-@events_route.post("/new")
+@events_router.post("/new")
 async def create_event(new_event: Event, session=Depends(get_session)) -> dict[str, str]:
     """Creates a new event"""
     session.add(new_event)
