@@ -31,3 +31,16 @@ async def retrieve_all_events(session=Depends(get_session)) -> List[Event]:
     statement = select(Event)
     events = session.exec(statement).all()
     return events
+
+
+@events_router.get("/{id}", response_model=Event)
+async def retrieve_event(id: int, session=Depends(get_session)) -> Event:
+    """Retrieves an event"""
+    event = session.get(Event, id)
+
+    if (event):
+        return event
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                        detail=f"Event with {id} not found"
+                        )
