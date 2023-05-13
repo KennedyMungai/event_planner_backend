@@ -5,6 +5,11 @@ from beanie import Document
 
 
 class Event(Document):
+    """The template for the Event data
+
+    Args:
+        Document (Document): The beanie document class
+    """
     title: str
     image: str
     description: str
@@ -12,6 +17,8 @@ class Event(Document):
     location: str
 
     class Config:
+        """The Event configuration subclass
+        """
         schema_extra = {
             "example": {
                 "title": "Kijana Mang'aa",
@@ -23,4 +30,6 @@ class Event(Document):
         }
 
     class Settings:
+        """The Settings subclass for the Event model
+        """
         name = "events"
