@@ -34,23 +34,23 @@ async def retrieve_all_events(session=Depends(get_session)) -> List[Event]:
 
 
 @events_router.get("/{id}", response_model=Event)
-async def retrieve_event(id: int, session=Depends(get_session)) -> Event:
+async def retrieve_event(_id: int, session=Depends(get_session)) -> Event:
     """Retrieves an event"""
-    event = session.get(Event, id)
+    event = session.get(Event, _id)
 
     if (event):
         return event
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"Event with {id} not found"
+                        detail=f"Event with {_id} not found"
                         )
 
 
 @events_router.put("/edit/{id}", response_model=Event)
-async def edit_event(id: int, event_update: EventUpdate,
+async def edit_event(_id: int, event_update: EventUpdate,
                      session=Depends(get_session)) -> Event:
     """Edits an event"""
-    event = session.get(Event, id)
+    event = session.get(Event, _id)
 
     if event:
         event_data = event_update.dict(exclude_unset=True)
@@ -64,11 +64,11 @@ async def edit_event(id: int, event_update: EventUpdate,
         return event
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"Event with id {id} not found")
+                        detail=f"Event with id {_id} not found")
 
 
 @events_router.delete("/delete/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_event(id: int, session=Depends(get_session)):
+async def delete_event(_id: int, session=Depends(get_session)):
     """The endpoint to delete specific events
 
     Args:
@@ -78,7 +78,7 @@ async def delete_event(id: int, session=Depends(get_session)):
     Raises:
         HTTPException: A 404 is raised if the event is not found in the database
     """
-    event = session.get(Event, id)
+    event = session.get(Event, _id)
 
     if event:
         session.delete(event)
@@ -87,4 +87,4 @@ async def delete_event(id: int, session=Depends(get_session)):
         return None
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"The event with id of {id} was not found")
+                        detail=f"The event with id of {_id} was not found")
