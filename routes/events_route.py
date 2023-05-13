@@ -1,10 +1,11 @@
 """The events route file"""
 from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from database.connection import get_session
-from models.events_model import Event, EventUpdate
 from sqlmodel import select
 
+from database.connection import get_session
+from models.events_model import Event, EventUpdate
 
 events_router = APIRouter(prefix="/events", tags=["Events"])
 
