@@ -5,7 +5,7 @@ from beanie import PydanticObjectId
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlmodel import select
 
-from database.connection import Database, get_session
+from database.connection import Database
 from models.events_model import Event, EventUpdate
 
 events_router = APIRouter(prefix="/events", tags=["Events"])
