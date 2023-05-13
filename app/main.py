@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from routes.users_route import user_router
 from routes.events_route import event_router
+from database.connection import conn
 
 app = FastAPI(
     title="Event Planner Backend",
