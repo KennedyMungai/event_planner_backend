@@ -64,3 +64,13 @@ class Database:
         await doc.update(update_query)
 
         return doc
+
+    async def delete(self, id: PydanticObjectId) -> bool:
+        doc = await self.get(id)
+
+        if not doc:
+            return False
+
+        await doc.delete()
+
+        return True
