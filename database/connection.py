@@ -1,7 +1,7 @@
 """The DB connection file"""
-from sqlmodel import SQLModel, Session, create_engine
-from models.events_model import Event
+from sqlmodel import Session, SQLModel, create_engine
 
+from models.events_model import Event
 
 database_connection_string = "sqlite:///planner.db"
 connect_args = {"check_same_thread": False}
