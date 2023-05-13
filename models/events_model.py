@@ -1,6 +1,7 @@
 """The events model class"""
+from typing import List, Optional
+
 from beanie import Document
-from typing import Optional, List
 
 
 class Event(Document):
