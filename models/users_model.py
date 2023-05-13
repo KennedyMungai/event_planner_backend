@@ -31,3 +31,13 @@ class User(Document):
                 "events": []
             }
         }
+
+
+class UserSignIn(BaseModel):
+    """The template for the User data
+
+    Args:
+        BaseModel (pydantic): The parent class for the User data
+    """
+    email: EmailStr
+    password: str
