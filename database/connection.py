@@ -1,8 +1,8 @@
 """The DB connection file"""
 import os
-from typing import Any, Optional, List
+from typing import Any, List, Optional
 
-from beanie import init_beanie, PydanticObjectId
+from beanie import PydanticObjectId, init_beanie
 from dotenv import find_dotenv, load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, BaseSettings
