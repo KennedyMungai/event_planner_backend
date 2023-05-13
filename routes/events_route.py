@@ -9,6 +9,7 @@ from database.connection import Database, get_session
 from models.events_model import Event, EventUpdate
 
 events_router = APIRouter(prefix="/events", tags=["Events"])
+event_database = Database(Event)
 
 
 @events_router.post(
@@ -29,8 +30,7 @@ async def create_event(new_event: Event, session=Depends(get_session)) -> dict[s
 @events_router.get("/", response_model=List[Event])
 async def retrieve_all_events(session=Depends(get_session)) -> List[Event]:
     """Retrieves all events"""
-    statement = select(Event)
-    events = session.exec(statement).all()
+    events = await event_database.get_all()
     return events
 
 
