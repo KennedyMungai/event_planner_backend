@@ -18,7 +18,7 @@ event_database = Database(Event)
     description="The endpoint to create a new post",
     status_code=status.HTTP_201_CREATED
 )
-async def create_event(new_event: Event, session=Depends(get_session)) -> dict[str, str]:
+async def create_event(new_event: Event) -> dict[str, str]:
     """Creates a new event"""
     session.add(new_event)
     session.commit()
@@ -28,28 +28,24 @@ async def create_event(new_event: Event, session=Depends(get_session)) -> dict[s
 
 
 @events_router.get("/", response_model=List[Event])
-async def retrieve_all_events(session=Depends(get_session)) -> List[Event]:
+async def retrieve_all_events() -> List[Event]:
     """Retrieves all events"""
     events = await event_database.get_all()
     return events
 
 
 @events_router.get("/{id}", response_model=Event)
-async def retrieve_event(_id: int, session=Depends(get_session)) -> Event:
+async def retrieve_event(_id: PydanticObjectId) -> Event:
     """Retrieves an event"""
-    event = session.get(Event, _id)
+    event = await event_database.get(id)
 
-    if (event):
-        return event
-
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"Event with {_id} not found"
-                        )
+    if not event:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Event with id {id} not found")
 
 
 @events_router.put("/edit/{id}", response_model=Event)
-async def edit_event(_id: int, event_update: EventUpdate,
-                     session=Depends(get_session)) -> Event:
+async def edit_event(_id: int, event_update: EventUpdate) -> Event:
     """Edits an event"""
     event = session.get(Event, _id)
 
@@ -69,7 +65,7 @@ async def edit_event(_id: int, event_update: EventUpdate,
 
 
 @events_router.delete("/delete/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_event(_id: int, session=Depends(get_session)):
+async def delete_event(_id: int):
     """The endpoint to delete specific events
 
     Args:
