@@ -20,9 +20,7 @@ event_database = Database(Event)
 )
 async def create_event(new_event: Event) -> dict[str, str]:
     """Creates a new event"""
-    session.add(new_event)
-    session.commit()
-    session.refresh(new_event)
+    await event_database.create(new_event)
 
     return {"message": "Event created successfully"}
 
