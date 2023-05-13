@@ -1,59 +1,25 @@
 """The events model class"""
-from typing import List, Optional
+from beanie import Document
+from typing import Optional, List
 
-from sqlmodel import JSON, Column, Field, SQLModel
 
-
-class Event(SQLModel, table=True):
-    """The event model class
-
-    Args:
-        SQLModel (Pydantic): The parent class for the models
-        table (bool, optional): A bool that defined the model as a table. Defaults to True.
-    """
-    id: int = Field(default=None, primary_key=True)
+class Event(Document):
     title: str
     image: str
     description: str
-    date: str
-    tags: List[str] = Field(sa_column=Column(JSON))
+    tags: List[str]
     location: str
 
     class Config:
-        """The config subclass for the event class"""
-        arbitrary_types_allowed = True
         schema_extra = {
             "example": {
-                "title": "SQLite db branch for the event planner code",
-                "image": "https://www.w3schools.com/howto/img_avatar.png",
-                "description": "This is a description of the event",
-                "date": "2022-01-01",
-                "tags": ["python", "sql", "sqlite"],
-                "location": "Somewhere in the world"
+                "title": "Kijana Mang'aa",
+                "image": "https://www.kijana.com/wp-content/uploads/2019/12/Kijana-Mang'aa-2.jpg",
+                "description": "Kijana Mang'aa is a traditional Thai food event that is held in the city of Bangkok.",
+                "tags": ["Thai", "Food", "Bakery"],
+                "location": "Bangkok"
             }
         }
 
-
-class EventUpdate(SQLModel):
-    """The event update model class
-
-    Args:
-        SQLModel (Pydantic): The parent class for the models
-    """
-    title: Optional[str]
-    image: Optional[str]
-    description: Optional[str]
-    tags: Optional[List[str]]
-    location: Optional[str]
-
-    class Config:
-        """The config subclass for the event update class"""
-        schema_extra = {
-            "example": {
-                "title": "SQLite db branch for the event planner code",
-                "image": "https://www.w3schools.com/howto/img_avatar.png",
-                "description": "This is a description of the event",
-                "tags": ["python", "sql", "sqlite"],
-                "location": "Somewhere in the world"
-            }
-        }
+    class Settings:
+        name = "events"
