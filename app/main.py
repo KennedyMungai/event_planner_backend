@@ -3,7 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 
 from database.connection import conn
-from routes.events_route import event_router
+from routes.events_route import event_route
 from routes.users_route import user_router
 
 app = FastAPI(
@@ -26,7 +26,7 @@ async def root() -> dict[str, str]:
     return {"message": "Hello World"}
 
 app.include_router(user_router)
-app.include_router(event_router)
+app.include_router(event_route)
 
 
 if __name__ == "__main__":
