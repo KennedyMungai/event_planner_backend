@@ -2,9 +2,9 @@
 import uvicorn
 from fastapi import FastAPI
 
-from routes.users_route import user_router
-from routes.events_route import event_router
 from database.connection import conn
+from routes.events_route import event_router
+from routes.users_route import user_router
 
 app = FastAPI(
     title="Event Planner Backend",
