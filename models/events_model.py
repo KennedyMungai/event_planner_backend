@@ -37,6 +37,11 @@ class Event(Document):
 
 
 class EventUpdate(BaseModel):
+    """The template for the update data
+
+    Args:
+        BaseModel (Pydantic): The base class for the EventUpdate class
+    """
     title: Optional[str]
     image: Optional[str]
     description: Optional[str]
@@ -44,6 +49,8 @@ class EventUpdate(BaseModel):
     location: Optional[str]
 
     class Config:
+        """The subclass for the EventUpdate class
+        """
         schema_extra = {
             "example": {
                 "title": "Kijana Mang'aa",
