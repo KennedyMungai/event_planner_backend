@@ -54,7 +54,7 @@ async def edit_event(_id: PydanticObjectId, event_update: EventUpdate) -> Event:
 
 
 @events_router.delete("/delete/{id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_event(_id: int):
+async def delete_event(_id: PydanticObjectId):
     """The endpoint to delete specific events
 
     Args:
