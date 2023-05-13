@@ -22,5 +22,5 @@ class Settings(BaseSettings):
     """
     async def initialize_database(self):
         """The function to initialize a database connection"""
-        client = AsyncIOMotorClient(self.DATABASE_URL)
+        client = AsyncIOMotorClient(DATABASE_URL)
         await init_beanie(database=client.events, document_models=[])
