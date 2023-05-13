@@ -54,17 +54,14 @@ async def sign_user_in(user: UserSignIn) -> dict:
     Returns:
         dict: _description_
     """
-    if user.email not in users:
+    user_exist = await User.find_one(User.email == user.email)
+
+    if not user_exist:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User does not exist"
+            detail="User with supplied username not found"
         )
 
-    if users[user.email].password != user.password:
+    if user_exist.password != user.password:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Wrong credential passed"
-        )
-    return {
-        "message": "User signed in successfully"
-    }
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials passed")
