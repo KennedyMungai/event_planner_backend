@@ -43,23 +43,15 @@ async def retrieve_event(_id: PydanticObjectId) -> Event:
 
 
 @events_router.put("/edit/{id}", response_model=Event)
-async def edit_event(_id: int, event_update: EventUpdate) -> Event:
+async def edit_event(_id: PydanticObjectId, event_update: EventUpdate) -> Event:
     """Edits an event"""
-    event = session.get(Event, _id)
+    updated_event = await event_database.update(_id, event_update)
 
-    if event:
-        event_data = event_update.dict(exclude_unset=True)
-        for key, value in event_data.items():
-            setattr(event, key, value)
+    if not updated_event:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Event with the id {id} does not exist")
 
-        session.add(event)
-        session.commit()
-        session.refresh(event)
-
-        return event
-
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"Event with id {_id} not found")
+    return updated_event
 
 
 @events_router.delete("/delete/{id}", status_code=status.HTTP_204_NO_CONTENT)
