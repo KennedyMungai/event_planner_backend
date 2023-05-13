@@ -65,3 +65,26 @@ async def edit_event(id: int, event_update: EventUpdate,
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                         detail=f"Event with id {id} not found")
+
+
+@events_router.delete("/delete/{id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_event(id: int, session=Depends(get_session)):
+    """The endpoint to delete specific events
+
+    Args:
+        id (int): The id of the event to be deleted
+        session (_type_, optional): The db session. Defaults to Depends(get_session).
+
+    Raises:
+        HTTPException: A 404 is raised if the event is not found in the database
+    """
+    event = session.get(Event, id)
+
+    if event:
+        session.delete(event)
+        session.commit()
+
+        return None
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                        detail=f"The event with id of {id} was not found")
