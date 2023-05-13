@@ -15,7 +15,9 @@ app = FastAPI(
 @app.on_event("startup")
 async def app_startup():
     """The startup event"""
+    print("Creating the database connection")
     conn()
+    print("Created the database connection")
 
 
 @app.get("/", name="Root", description="The root route for testing",  tags=["Root"])
