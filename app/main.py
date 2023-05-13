@@ -12,6 +12,12 @@ app = FastAPI(
 )
 
 
+@app.on_event("startup")
+async def app_startup():
+    """The startup event"""
+    conn()
+
+
 @app.get("/", name="Root", description="The root route for testing",  tags=["Root"])
 async def root() -> dict[str, str]:
     """The root route"""
