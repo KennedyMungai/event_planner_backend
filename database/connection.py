@@ -3,9 +3,9 @@ from sqlmodel import Session, SQLModel, create_engine
 
 from models.events_model import Event
 
-database_connection_string = "sqlite:///planner.db"
+DATABASE_CONNECTION_STRING = "sqlite:///planner.db"
 connect_args = {"check_same_thread": False}
-engine_url = create_engine(database_connection_string,
+engine_url = create_engine(DATABASE_CONNECTION_STRING,
                            connect_args=connect_args)
 
 
