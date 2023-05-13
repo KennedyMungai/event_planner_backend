@@ -6,6 +6,8 @@ from sqlmodel import select
 
 from database.connection import get_session
 from models.events_model import Event, EventUpdate
+from beanie import PydanticObjectId
+from database.connection import Database
 
 events_router = APIRouter(prefix="/events", tags=["Events"])
 
