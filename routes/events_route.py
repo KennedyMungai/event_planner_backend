@@ -1,4 +1,5 @@
 """The events route file"""
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from database.connection import get_session
 from models.events_model import Event, EventUpdate
@@ -20,3 +21,11 @@ async def create_event(new_event: Event, session=Depends(get_session)) -> dict[s
     session.refresh(new_event)
 
     return {"message": "Event created successfully"}
+
+
+@events_router.get("/", response_model=List[Event])
+async def retrieve_all_events(session=Depends(get_session)) -> List[Event]:
+    """Retrieves all events"""
+    statement = select(Event)
+    events = session.exec(statement).all()
+    return events
