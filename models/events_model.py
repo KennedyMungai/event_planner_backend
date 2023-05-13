@@ -1,6 +1,7 @@
 """The events model class"""
-from sqlmodel import JSON, SQLModel, Field, Column
-from typing import Optional, List
+from typing import List, Optional
+
+from sqlmodel import JSON, Column, Field, SQLModel
 
 
 class Event(SQLModel, table=True):
