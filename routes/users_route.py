@@ -3,6 +3,8 @@ from fastapi import APIRouter, HTTPException, status
 
 from models.users_model import User, UserSignIn
 
+from database.connection import Database
+
 user_router = APIRouter(
     tags=["User"],
 )
